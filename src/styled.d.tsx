@@ -5,9 +5,8 @@ styled-components는 JS 기반 라이브러리다.
 */
 declare module "styled-components"{
     export interface DefaultTheme {
-        textColor: string;
         bgColor: string;
-        accentColor: string;
-        cardBgColor: string;
+        boardColor: string;
+        cardColor: string;
     }
 }
