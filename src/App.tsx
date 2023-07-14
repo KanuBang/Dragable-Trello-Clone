@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { DragDropContext,DropResult } from 'react-beautiful-dnd';
 import { useRecoilState } from 'recoil';
 import styled from "styled-components";
@@ -28,7 +28,6 @@ const App = () => {
   
   const [toDos, setTodos] = useRecoilState(toDoState)
   const onDragEnd = (info:DropResult) => {
-    console.log(info)
     const {destination, draggableId, source} = info
     // 드래그 앤 드롭의 위치가 변화가 없을 때 => destination : null => boolean으로 치면 false
     if(!destination) {
@@ -69,7 +68,7 @@ const App = () => {
       })
     }
   }
-
+  
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Wrapper>
