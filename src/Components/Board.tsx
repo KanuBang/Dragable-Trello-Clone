@@ -4,12 +4,14 @@ import styled from "styled-components";
 import DragabbleCard from "./DragabbleCard";
 
 const Wrapper = styled.div`
-    padding: 20px 10px;
+    width: 300px;
+    padding-top: 10px;
     background-color: ${(props) => props.theme.boardColor};
     border-radius: 5px;
     min-height: 300px;
     display: flex;
     flex-direction: column;
+    overflow: hidden; // 왜 안되지?
 `
 
 const Title = styled.h2`
@@ -30,9 +32,14 @@ interface IAreaProps {
 }
 
 const Area = styled.div<IAreaProps>`
-  background-color: ${(props) => props.isDraggingOver ? "pink" : props.isDraggingFromThis ? "red" : "blue"};
+  background-color: ${(props) => props.isDraggingOver 
+    ? "#dfe6e9" 
+    : props.isDraggingFromThis 
+    ? "#b2bec3" 
+    : "transparent"};
   flex-grow: 1;
   transition: background-color 0.3s ease-in-out;
+  padding: 20px;
 `
 
 const Board = ({toDos, boardId} : IBaordProps) => {
@@ -40,10 +47,10 @@ const Board = ({toDos, boardId} : IBaordProps) => {
     <Wrapper>
       <Title>{boardId}</Title>
       <Droppable droppableId={boardId}>
-          {(magic, info) => (
+          {(magic, snapshot) => (
             <Area 
-              isDraggingOver = {Boolean(info.isDraggingOver)}
-              isDraggingFromThis = {Boolean(info.draggingFromThisWith)}
+              isDraggingOver = {Boolean(snapshot.isDraggingOver)}
+              isDraggingFromThis = {Boolean(snapshot.draggingFromThisWith)}
               ref = {magic.innerRef} 
               {...magic.droppableProps}
             >
