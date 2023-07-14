@@ -33,9 +33,13 @@ const App = () => {
     if (destination?.droppableId === source.droppableId) {
       //same board movement
       setTodos((allBoards) => {
-        const boardCopy = [...allBoards[source.droppableId]]
+        // 시작 위치 id로 이벤트가 발생한 해당 보드의 내용을 가지고 옴
+        const boardCopy = [...allBoards[source.droppableId]] 
+        // 드래그 되는 위치의 task를 삭제하고
         boardCopy.splice(source.index, 1);
+        // 드래그가 마친 목적지에다가 draggable Id로 해당 task를 추가한다
         boardCopy.splice(destination?.index, 0, draggableId)
+        console.log(allBoards)
         return {
           ...allBoards,
           [source.droppableId] : boardCopy
@@ -49,7 +53,7 @@ const App = () => {
       <Wrapper>
         <Boards>
           {Object.keys(toDos).map((boardId) => (
-            <Board boardId={boardId} key={boardId} toDos={toDos[boardId]}></Board>
+            <Board key={boardId} boardId={boardId} toDos={toDos[boardId]}></Board>
           ))}
         </Boards>
       </Wrapper>
